@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+/* conditional rendering puzzle: build a react component that renders "hello world",initially. 
+   after 5 seconds change the text to "good bye world" without using any external state management libraries 
+   or timers
+*/
+import React, { useState, useEffect } from "react";
 
-function App() {
+const Puzzle = () => {
+  const [message, setMessage] = useState("hello world");
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setMessage("good bye");
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>message: {message}</h1>
     </div>
   );
-}
+};
 
-export default App;
+export default Puzzle;
